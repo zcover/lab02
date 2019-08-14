@@ -1,4 +1,6 @@
 'use strict';
+
+// alert('hi');
 const gallery = [];
 
 // ----- CONSTRUCTOR FUNCTION ---------
@@ -42,5 +44,6 @@ Image.prototype.renderWithjQuery = function(){
     console.log('appending newSection to id photo-template');
 };
 
+getAllImagesfromGallery();
 
 // render
