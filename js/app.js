@@ -48,14 +48,13 @@ Image.prototype.renderWithjQuery = function(){
 
     $newSection.find('h2').html(this.title);
     
-    $newSection.find('p').text(this.description);
+    $newSection.find('#descript').text(this.description);
     
-    //are these attributes?
     $newSection.find('img').attr('src', this.url);
 
-    // $newSection.find('h2').attribute(this.keyword);
+    $newSection.find('#keyword').text(this.keyword);
 
-    // $newSection.find('h2').attribute(this.horns);
+    $newSection.find('#horns').text(this.horns);
 
     //append
     $('main').append($newSection);
