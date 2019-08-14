@@ -61,6 +61,22 @@ Image.prototype.renderWithjQuery = function(){
     console.log('appending newSection to id photo-template');
 };
 
+
+Image.prototype.renderDropDown = function(keyword){
+    const $myMenu = $('<select></select>');
+    const $myMenuHtml = $myMenu.html();
+
+    const $newMenu = $('<option></option>');
+    $newMenu.html($myMenuHtml);
+
+    $newMenu.find('option').text(this.keyword);
+
+    //append
+    $('option').append($newMenu);
+    console.log('hi');
+}
+
+
 getAllImagesfromGallery();
 console.log('get all images')
 
