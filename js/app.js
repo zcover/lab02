@@ -3,6 +3,16 @@
 // alert('hi');
 const gallery = [];
 
+function Image(url, title, desc, keyword, horns){
+    this.url = url;
+    this.title = title;
+    this.description = desc;
+    this.keyword = keyword;
+    this.horns = horns;
+
+    gallery.push(this);
+};
+
 // ----- CONSTRUCTOR FUNCTION ---------
 const getAllImagesfromGallery = () => {
 
@@ -14,43 +24,60 @@ const getAllImagesfromGallery = () => {
         //forEach is looping once over each image to obtain the title,url,horns,description, and keyword properties of each image
         images.forEach(eachImage => {
             new Image(
-                this.url = eachImage.image_url,
-                this.title = eachImage.title ,
-                this.description=eachImage.description, 
-                this.keyword=eachImage.keyword, 
-                this.horns=eachImage.horns);
-                gallery.push(this);
-                console.log(`${this.title} has loaded`);
+                eachImage.image_url,
+                eachImage.title ,
+                eachImage.description, 
+                eachImage.keyword, 
+                eachImage.horns);
         });
-    
-    // allImages[0].renderWithjQuery();
+        for(let i = 0; i<gallery.length; i++){
+            gallery[i].renderWithjQuery();
+            console.log(`rendered ${gallery[i]} at index ${i}`);
+        }
+        console.log('render with query')
     });    
 };
 
 // PROTOTYPES
 Image.prototype.renderWithjQuery = function(){
     const $myTemplate = $('#photo-template');
-    const myTemplateHtml = $myTemplateHtml.html();
+    const $myTemplateHtml = $myTemplate.html();
 
     const $newSection = $('<section></section>');
+    $newSection.html($myTemplateHtml);
+
     $newSection.find('h2').html(this.title);
     
-    $newSection.find('p').text(this.description);
+    $newSection.find('#descript').text(this.description);
     
-    //are these attributes?
-    $newSection.find('img').attr('src', this.image_url);
+    $newSection.find('img').attr('src', this.url);
 
-    // $newSection.find('h2').attribute(this.keyword);
+    $newSection.find('#keyword').text(this.keyword);
 
-    // $newSection.find('h2').attribute(this.horns);
+    $newSection.find('#horns').text(this.horns);
 
     //append
     $('main').append($newSection);
     console.log('appending newSection to id photo-template');
 };
 
+
+Image.prototype.renderDropDown = function(keyword){
+    const $myMenu = $('<select></select>');
+    const $myMenuHtml = $myMenu.html();
+
+    const $newMenu = $('<option></option>');
+    $newMenu.html($myMenuHtml);
+
+    $newMenu.find('option').text(this.keyword);
+
+    //append
+    $('option').append($newMenu);
+    console.log('hi');
+}
+
+
 getAllImagesfromGallery();
 console.log('get all images')
-renderWithjQuery(this);
-console.log('render with query')
+
 // render
