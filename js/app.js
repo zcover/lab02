@@ -2,6 +2,7 @@
 
 // alert('hi');
 const gallery = [];
+let pageOneImages = [];
 
 function Image(url, title, desc, keyword, horns){
     this.url = url;
@@ -23,63 +24,93 @@ const getAllImagesfromGallery = () => {
 
         //forEach is looping once over each image to obtain the title,url,horns,description, and keyword properties of each image
         images.forEach(eachImage => {
-            new Image(
+            pageOneImages.push(new Image(
                 eachImage.image_url,
                 eachImage.title ,
                 eachImage.description, 
                 eachImage.keyword, 
-                eachImage.horns);
+                eachImage.horns));
         });
-        for(let i = 0; i<gallery.length; i++){
-            gallery[i].renderWithjQuery();
-            // console.log(`rendered ${gallery[i]} at index ${i}`);
-            gallery[i].renderDropDown();
-            console.log(`render ${gallery[i]} at index ${i}`);
-        }
-        // console.log('render with query')
-    });    
+        
+    })   
+    .then(data=>{
+        console.log('i am here');
+        console.log(pageOneImages);
+        renderImagesOne();
+        console.log(data);
+    });
 };
 
+let renderImagesOne = function(){
+
+    console.log('I am at the for loop')
+    console.log(pageOneImages)
+    pageOneImages.forEach(object=>{
+        console.log('inside of the for loop')
+        object.renderWithjQuery();
+    })
+    console.log('I am after the for loop');
+}
+console.log('preloop')
+// console.log('render with query')
+
+//for every object in the gallery arr we will renderWithjQuery
+
 // PROTOTYPES
+//renderWithjQuery identifies DOM, creates a <section> fills with data and appends to main. 
 Image.prototype.renderWithjQuery = function(){
+    //grabbing a template from html
     const $myTemplate = $('#photo-template');
     const $myTemplateHtml = $myTemplate.html();
 
+    //adding section to template
     const $newSection = $('<section></section>');
+    
+    //Setting the blank template in html
     $newSection.html($myTemplateHtml);
-
+    
+    //inside of added section:
     $newSection.find('h2').html(this.title);
-    
     $newSection.find('#descript').text(this.description);
-    
     $newSection.find('img').attr('src', this.url);
-
     $newSection.find('#keyword').text(this.keyword);
-
     $newSection.find('#horns').text(this.horns);
-
-    //append
+    
+    //appending section to main with data
     $('main').append($newSection);
-    // console.log('appending newSection to id photo-template');
 };
 
 
-Image.prototype.renderDropDown = function(keyword){
-    const $myMenu = $('#menu');
-    const $myMenuHtml = $myMenu.html();
+// Image.prototype.renderDropDown = function(keyword){
+//     const $myMenu = $('#menu');
+//     const $myMenuHtml = $myMenu.html();
 
-    const $newMenu = $('<option></option>');
-    $newMenu.html($myMenuHtml);
+//     const $newMenu = $('<option></option>');
+//     $newMenu.html($myMenuHtml);
 
-    $newMenu.find('option').html(this.keyword);
+//     $newMenu.find('option').html(this.keyword);
 
-    //append
-    $('option').append($newMenu);
-    console.log('hi');
-}
+//     //append
+//     $('option').append($newMenu);
+//     console.log('hi');
+// }
+
+
+// let example = function(){
+//     const $exDropDown = $('#menu');
+//     const $templateHtml = $exDropDown.html();
+//     //created template of drop down menu
+//     const $newSelect = $('<select></select>');
+    
+//     $newSelect.find('option').text('1');
+//     $('select'.child).append()
+// }
+
+
 
 
 getAllImagesfromGallery();
+
 console.log('get all images')
 // renderDropDown();
 console.log('render drop down');
