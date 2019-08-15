@@ -18,7 +18,7 @@ const getAllImagesfromGallery = () => {
 
     $.get('./js/page-1.json').then(images => {
         //console is logging the confirmation of image receieved from .json file
-        console.log('Images received from .then', images);
+        // console.log('Images received from .then', images);
 
 
         //forEach is looping once over each image to obtain the title,url,horns,description, and keyword properties of each image
@@ -32,9 +32,11 @@ const getAllImagesfromGallery = () => {
         });
         for(let i = 0; i<gallery.length; i++){
             gallery[i].renderWithjQuery();
-            console.log(`rendered ${gallery[i]} at index ${i}`);
+            // console.log(`rendered ${gallery[i]} at index ${i}`);
+            gallery[i].renderDropDown();
+            console.log(`render ${gallery[i]} at index ${i}`);
         }
-        console.log('render with query')
+        // console.log('render with query')
     });    
 };
 
@@ -58,18 +60,18 @@ Image.prototype.renderWithjQuery = function(){
 
     //append
     $('main').append($newSection);
-    console.log('appending newSection to id photo-template');
+    // console.log('appending newSection to id photo-template');
 };
 
 
 Image.prototype.renderDropDown = function(keyword){
-    const $myMenu = $('<select></select>');
+    const $myMenu = $('#menu');
     const $myMenuHtml = $myMenu.html();
 
     const $newMenu = $('<option></option>');
     $newMenu.html($myMenuHtml);
 
-    $newMenu.find('option').text(this.keyword);
+    $newMenu.find('option').html(this.keyword);
 
     //append
     $('option').append($newMenu);
@@ -79,5 +81,7 @@ Image.prototype.renderDropDown = function(keyword){
 
 getAllImagesfromGallery();
 console.log('get all images')
+renderDropDown();
+console.log('render drop down');
 
 // render
