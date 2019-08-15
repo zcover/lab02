@@ -81,7 +81,8 @@ Image.prototype.renderDropDown = function(keyword){
 
 getAllImagesfromGallery();
 console.log('get all images')
-renderDropDown();
+// renderDropDown();
 console.log('render drop down');
 
 // render
+console.log();
