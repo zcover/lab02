@@ -47,7 +47,7 @@ let renderImagesOne = function(){
     console.log(pageOneImages)
     pageOneImages.forEach(object=>{
         console.log('inside of the for loop')
-        // object.renderWithjQuery();
+        object.renderWithjQuery();
     })
     console.log('I am after the for loop');
 }
